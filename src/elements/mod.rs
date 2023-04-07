@@ -61,7 +61,7 @@ pub use self::ops::AtomicsInstruction;
 #[cfg(feature = "simd")]
 pub use self::ops::SimdInstruction;
 
-#[cfg(feature = "sign_ext")]
+// #[cfg(feature = "sign_ext")]
 pub use self::ops::SignExtInstruction;
 
 #[cfg(feature = "bulk")]

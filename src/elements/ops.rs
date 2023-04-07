@@ -304,7 +304,7 @@ pub enum Instruction {
 	#[cfg(feature = "simd")]
 	Simd(SimdInstruction),
 
-	#[cfg(feature = "sign_ext")]
+	// #[cfg(feature = "sign_ext")]
 	SignExt(SignExtInstruction),
 
 	#[cfg(feature = "bulk")]
@@ -549,7 +549,7 @@ pub enum SimdInstruction {
 }
 
 #[allow(missing_docs)]
-#[cfg(feature = "sign_ext")]
+// #[cfg(feature = "sign_ext")]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum SignExtInstruction {
 	I32Extend8S,
@@ -782,7 +782,7 @@ pub mod opcodes {
 	pub const F32REINTERPRETI32: u8 = 0xbe;
 	pub const F64REINTERPRETI64: u8 = 0xbf;
 
-	#[cfg(feature = "sign_ext")]
+	// #[cfg(feature = "sign_ext")]
 	pub mod sign_ext {
 		pub const I32_EXTEND8_S: u8 = 0xc0;
 		pub const I32_EXTEND16_S: u8 = 0xc1;
@@ -1055,7 +1055,7 @@ impl Deserialize for Instruction {
 	fn deserialize<R: io::Read>(reader: &mut R) -> Result<Self, Self::Error> {
 		use self::{opcodes::*, Instruction::*};
 
-		#[cfg(feature = "sign_ext")]
+		// #[cfg(feature = "sign_ext")]
 		use self::opcodes::sign_ext::*;
 
 		let val: u8 = Uint8::deserialize(reader)?.into();
@@ -1368,7 +1368,7 @@ impl Deserialize for Instruction {
 			F32REINTERPRETI32 => F32ReinterpretI32,
 			F64REINTERPRETI64 => F64ReinterpretI64,
 
-			#[cfg(feature = "sign_ext")]
+			// #[cfg(feature = "sign_ext")]
 			I32_EXTEND8_S | I32_EXTEND16_S | I64_EXTEND8_S | I64_EXTEND16_S | I64_EXTEND32_S => match val {
 				I32_EXTEND8_S => SignExt(SignExtInstruction::I32Extend8S),
 				I32_EXTEND16_S => SignExt(SignExtInstruction::I32Extend16S),
@@ -2043,7 +2043,7 @@ impl Serialize for Instruction {
 			F32ReinterpretI32 => op!(writer, F32REINTERPRETI32),
 			F64ReinterpretI64 => op!(writer, F64REINTERPRETI64),
 
-			#[cfg(feature = "sign_ext")]
+			// #[cfg(feature = "sign_ext")]
 			SignExt(ref a) => match *a {
 				SignExtInstruction::I32Extend8S => op!(writer, sign_ext::I32_EXTEND8_S),
 				SignExtInstruction::I32Extend16S => op!(writer, sign_ext::I32_EXTEND16_S),
@@ -2618,7 +2618,7 @@ impl fmt::Display for Instruction {
 			F32ReinterpretI32 => write!(f, "f32.reinterpret/i32"),
 			F64ReinterpretI64 => write!(f, "f64.reinterpret/i64"),
 
-			#[cfg(feature = "sign_ext")]
+			// #[cfg(feature = "sign_ext")]
 			SignExt(ref i) => match i {
 				SignExtInstruction::I32Extend8S => write!(f, "i32.extend8_s"),
 				SignExtInstruction::I32Extend16S => write!(f, "i32.extend16_s"),
