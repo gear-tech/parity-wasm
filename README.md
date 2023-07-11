@@ -1,3 +1,7 @@
+A fork of parity-wasm with sign-ext feature enabled.
+
+---
+
 # parity-wasm
 
 Low-level WebAssembly format library.
@@ -33,16 +37,16 @@ println!("Function count in wasm file: {}", code_section.bodies().len());
 
 To run testsuite:
 
-- checkout with submodules (`git submodule update --init --recursive`)
-- run `cargo test --release --workspace`
+-   checkout with submodules (`git submodule update --init --recursive`)
+-   run `cargo test --release --workspace`
 
 Decoder can be fuzzed with `cargo-fuzz` using [`wasm-opt`](https://github.com/WebAssembly/binaryen):
 
-- make sure you have all prerequisites to build `binaryen` and `cargo-fuzz` (`cmake` and a C++11 toolchain)
-- checkout with submodules (`git submodule update --init --recursive`)
-- install `cargo fuzz` subcommand with `cargo install cargo-fuzz`
-- set rustup to use a nightly toolchain, because `cargo fuzz` uses a rust compiler plugin: `rustup override set nightly`
-- run `cargo fuzz run deserialize`
+-   make sure you have all prerequisites to build `binaryen` and `cargo-fuzz` (`cmake` and a C++11 toolchain)
+-   checkout with submodules (`git submodule update --init --recursive`)
+-   install `cargo fuzz` subcommand with `cargo install cargo-fuzz`
+-   set rustup to use a nightly toolchain, because `cargo fuzz` uses a rust compiler plugin: `rustup override set nightly`
+-   run `cargo fuzz run deserialize`
 
 ## `no_std` crates
 
