@@ -1,7 +1,8 @@
-# parity-wasm
+A fork of parity-wasm with sign-ext feature enabled.
 
-> :warning: **This repository/crate is deprecated and unmaintained**: If you interested in maintaining
-this crate consider forking it. We can provide a link to the most promising forks here.
+---
+
+# parity-wasm
 
 Low-level WebAssembly format library.
 
