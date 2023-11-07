@@ -1,5 +1,5 @@
 [package]
-name = "parity-wasm"
+name = "gear-wasm"
 version = "0.45.1"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Svyatoslav Nikolsky <svyatonik@yandex.ru>", "Sergey Shulepov <s.pepyakin@gmail.com>"]
 license = "MIT/Apache-2.0"
