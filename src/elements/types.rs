@@ -103,7 +103,7 @@ pub enum BlockType {
 	/// Inline value type.
 	Value(ValueType),
 	/// Reference to a signature.
-	#[cfg(feature = "multi_value")]
+	// #[cfg(feature = "multi_value")]
 	TypeIndex(u32),
 }
 
@@ -121,13 +121,13 @@ impl Deserialize for BlockType {
 			-0x04 => Ok(BlockType::Value(ValueType::F64)),
 			#[cfg(feature = "simd")]
 			-0x05 => Ok(BlockType::Value(ValueType::V128)),
-			#[cfg(feature = "multi_value")]
+			// #[cfg(feature = "multi_value")]
 			idx => {
 				let idx = idx.try_into().map_err(|_| Error::UnknownBlockType(idx))?;
 				Ok(BlockType::TypeIndex(idx))
 			},
-			#[cfg(not(feature = "multi_value"))]
-			_ => Err(Error::UnknownBlockType(val.into())),
+			// #[cfg(not(feature = "multi_value"))]
+			// _ => Err(Error::UnknownBlockType(val.into())),
 		}
 	}
 }
@@ -144,7 +144,7 @@ impl Serialize for BlockType {
 			BlockType::Value(ValueType::F64) => -0x04,
 			#[cfg(feature = "simd")]
 			BlockType::Value(ValueType::V128) => -0x05,
-			#[cfg(feature = "multi_value")]
+			// #[cfg(feature = "multi_value")]
 			BlockType::TypeIndex(idx) => idx as i32,
 		}
 		.into();
@@ -207,12 +207,12 @@ impl Deserialize for FunctionType {
 		let params: Vec<ValueType> = CountedList::deserialize(reader)?.into_inner();
 		let results: Vec<ValueType> = CountedList::deserialize(reader)?.into_inner();
 
-		#[cfg(not(feature = "multi_value"))]
-		if results.len() > 1 {
-			return Err(Error::Other(
-				"Enable the multi_value feature to deserialize more than one function result",
-			))
-		}
+		// #[cfg(not(feature = "multi_value"))]
+		// if results.len() > 1 {
+		// 	return Err(Error::Other(
+		// 		"Enable the multi_value feature to deserialize more than one function result",
+		// 	))
+		// }
 
 		Ok(FunctionType { form, params, results })
 	}
